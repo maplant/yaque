@@ -53,7 +53,7 @@ where
 {
     // Set up watcher:
     let mut watcher =
-        notify::immediate_watcher(move |maybe_event: notify::Result<notify::Event>| {
+        notify::recommended_watcher(move |maybe_event: notify::Result<notify::Event>| {
             match maybe_event.expect("received error from watcher") {
                 // When any modification in the file happens
                 Event {
@@ -89,7 +89,7 @@ where
 {
     // Set up watcher:
     let mut watcher =
-        notify::immediate_watcher(move |maybe_event: notify::Result<notify::Event>| {
+        notify::recommended_watcher(move |maybe_event: notify::Result<notify::Event>| {
             match maybe_event.expect("received error from watcher") {
                 Event {
                     kind: EventKind::Remove(_),
@@ -108,7 +108,7 @@ where
 
     // Put watcher to run:
     watcher
-        .watch(path, notify::RecursiveMode::NonRecursive)
+        .watch(path.as_ref(), notify::RecursiveMode::NonRecursive)
         .expect("could not start watching file");
 
     watcher
@@ -121,7 +121,7 @@ where
 {
     // Set up watcher:
     let mut watcher =
-        notify::immediate_watcher(move |maybe_event: notify::Result<notify::Event>| {
+        notify::recommended_watcher(move |maybe_event: notify::Result<notify::Event>| {
             match maybe_event.expect("received error from watcher") {
                 // When any modification in the file happens
                 Event {
@@ -147,7 +147,7 @@ where
 
     // Put watcher to run:
     watcher
-        .watch(path, notify::RecursiveMode::NonRecursive)
+        .watch(path.as_ref(), notify::RecursiveMode::NonRecursive)
         .expect("could not start watching file");
 
     watcher
